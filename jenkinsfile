@@ -1,0 +1,34 @@
+pipeline {
+  agent any
+  environment {
+    TF_IN_AUTOMATION = 'true'
+    TF_CLI_CONFIG_FILE = credentials('tf-creds')
+  }
+
+stages {
+    stage('Init') {
+      steps {
+        sh 'terraform init -no-color'
+      }
+    }
+    stage('Plan') {
+      steps {
+        sh 'terraform plan -no-color'
+      }
+    }
+    stage('Validate Apply') {
+      input {
+        message "Do you want to apply this plan?"
+        ok "Apply plan"
+      }
+    steps {
+        echo 'Apply Accepted'
+      }
+    }
+    stage('Apply') {
+      steps {
+        sh 'terraform apply -auto-approve -no-color'
+      }
+    }
+}
+}
