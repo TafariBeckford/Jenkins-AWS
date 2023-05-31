@@ -21,7 +21,7 @@ stages {
     }
     stage('Apply') {
       steps {
-        sh 'terraform apply -auto-approve -no-color'
+        sh 'terraform ${action} -auto-approve -no-color'
       }
     }
 }
