@@ -5,7 +5,7 @@ pipeline {
     TF_CLI_CONFIG_FILE = credentials('tf-creds')
   }
 tools {
-  terraform 'terraform '
+  terraform 'terraform'
 }
 
 stages {
